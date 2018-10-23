@@ -9,7 +9,9 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-SERVICES=$(ls $lservdir)
+SERVICES=($(ls $lservdir))
+
+echo "*** Found services: '$SERVICES' ***"
 
 for service in "${SERVICES[@]}"
 do
