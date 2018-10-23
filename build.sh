@@ -16,8 +16,11 @@ while [ $# -gt 0 ]; do
     shift
 done
 
-for proj in "${PROJECTS[@]}"
+for pair in "${PROJECTS[@]}"
 do
+    proj=($pair | cut -d ';' -f1)
+    port=($pair | cut -d ';' -f2)
+
     service=$(echo "$proj" | awk '{print tolower($0)}')
     SERVICES+=($service)
 
