@@ -11,7 +11,7 @@ while [ $# -gt 0 ]; do
             if [[ $1 == *"--proj"* ]]; then
                 PROJECTS+=($2)
                 echo "*** Projects: '$2' ***"
-            fis
+            fi
     fi
 
     shift
