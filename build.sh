@@ -19,8 +19,8 @@ done
 
 for pair in "${PROJECTS[@]}"
 do
-    proj=$(echo $pair | cut -d ';' -f1)
-    port=$(echo $pair | cut -d ';' -f2)
+    proj=$(echo $pair | cut -d ':' -f1)
+    port=$(echo $pair | cut -d ':' -f2)
 
     service=$(echo "$proj" | awk '{print tolower($0)}')
     SERVICES+=($service)
