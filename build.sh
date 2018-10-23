@@ -10,7 +10,8 @@ while [ $# -gt 0 ]; do
 
             if [[ $1 == *"--proj"* ]]; then
                 PROJECTS+=($2)
-            fi
+                echo "*** Projects: '$2' ***"
+            fis
     fi
 
     shift
@@ -24,7 +25,7 @@ do
     service=$(echo "$proj" | awk '{print tolower($0)}')
     SERVICES+=($service)
 
-    echo "*** Building dotnet project: '$proj' rev: '$b' ***"
+    echo "*** Building dotnet project: '$proj':'$port', rev: '$b' ***"
     dotnet publish ./src/$proj \
         -c Release \
         /p:BuildNumber=$b \
