@@ -11,8 +11,6 @@ done
 
 SERVICES=($(ls $lservdir))
 
-echo "*** Found services: '$SERVICES' ***"
-
 for service in "${SERVICES[@]}"
 do
     LOCAL_PATH=$lservdir/$service/*
