@@ -1,29 +1,40 @@
 set -e
 
+PROJECTS=()
+
 while [ $# -gt 0 ]; do
     if [[ $1 == *"--"* ]]; then
             v="${1/--/}"
             declare $v="$2"
+
+            if [[ $1 == *"--proj"* ]]; then
+                PROJECTS+=($2)
+            fi
     fi
 
     shift
 done
 
-service=$(echo "$proj" | awk '{print tolower($0)}')
+for proj in "${PROJECTS[@]}"
+do
 
-echo "*** Start services ***"
+  service=$(echo "$proj" | awk '{print tolower($0)}')
 
-release_dir=$rservdir/$service/releases/$stamp
-current_dir=$rservdir/$service/current
-systemd_unit_path=/etc/systemd/system/$service.service
+  echo "*** Finish service '$service' ***"
 
-echo "**** Ln '$release_dir' -> '$current_dir' ****"
-ssh $server "
-    rm -f $current_dir
-    ln -sf $release_dir $current_dir
+  release_dir=$rservdir/$service/releases/$stamp
+  current_dir=$rservdir/$service/current
+  systemd_unit_path=/etc/systemd/system/$service.service
 
-    sudo rm -f $systemd_unit_path
-    sudo ln -sf $current_dir/$service.service $systemd_unit_path
-  "
+  echo "**** Ln '$release_dir' -> '$current_dir' ****"
+  ssh $server "
+      rm -f $current_dir
+      ln -sf $release_dir $current_dir
 
-echo "Done."
+      sudo rm -f $systemd_unit_path
+      sudo ln -sf $current_dir/$service.service $systemd_unit_path
+    "
+
+done
+
+echo "*** Done. ***"
