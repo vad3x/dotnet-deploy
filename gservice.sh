@@ -34,12 +34,11 @@ echo "  Filling file '$SERVICE_FILE_PATH'..."
     echo ""
     echo "[Service]"
     echo "WorkingDirectory=$WORK_DIR"
-    echo "ExecStart=/usr/bin/dotnet $WORK_DIR/$dll"
+    echo "ExecStart=/usr/bin/dotnet $WORK_DIR/$dll --environment $e"
     echo "Restart=always"
     echo "RestartSec=10"
     echo "User=$user"
     echo "SyslogIdentifier=$s"
-    echo "Environment=ASPNETCORE_ENVIRONMENT=$e"
     if [[ $port ]]; then
         echo "Environment=ASPNETCORE_URLS=http://+:$port"
     fi
