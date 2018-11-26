@@ -19,7 +19,7 @@ echo "***** Determine first pending migration for: '$service', context: '$dbc' *
 
 first_pending=$(ssh $server "
     cd $RELEASE_REMOTE_PATH
-    ASPNETCORE_ENVIRONMENT=$e dotnet $proj.dll --pending-migrations --first $dbc
+    ASPNETCORE_ENVIRONMENT=$e dotnet $proj.dll --applied-migrations --last $dbc
 ")
 
 echo "      first migration: '$first_pending'"
