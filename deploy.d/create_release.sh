@@ -18,7 +18,7 @@ do
     SHARED_REMOTE_PATH=$rservdir/$service/shared
     SHARED_LOGS_REMOTE_PATH=$SHARED_REMOTE_PATH/logs
 
-    echo "*** Release service: '$LOCAL_PATH' -> '$RELEASE_REMOTE_PATH' ***"
+    echo "*** Release service: '$LOCAL_PATH' -> '$RELEASE_REMOTE_PATH' on server: '$server' ***"
     ssh $server "mkdir -p $RELEASE_REMOTE_PATH $SHARED_REMOTE_PATH $SHARED_LOGS_REMOTE_PATH; ln -sf $SHARED_REMOTE_PATH/* $RELEASE_REMOTE_PATH/"
     rsync -az --stats --delete $LOCAL_PATH $server:$RELEASE_REMOTE_PATH
 done
